@@ -100,6 +100,28 @@ Memory for cache     | 10 GB
 
 ## 5. System APIs
 
+* We can have SOAP or REST APIs to expose the functionality of our service.
+
+1. **addPaste**(api_dev_key, paste_data, custom_url=None user_name=None, paste_name=None, expire_date=None)
+
+   **Parameters**:
+   * **api_dev_key** (string): The API developer key of a registered account. This will be used to, among other things, throttle users based on their allocated quota.
+   * **paste_data** (string): Textual data of the paste.
+   * **custom_url** (string): Optional custom URL.
+   * **user_name** (string): Optional user name to be used to generate URL.
+   * **paste_name** (string): Optional name of the paste.
+   * **expire_date** (string): Optional expiration date for the paste.
+   
+   **Return**: (string)
+   * A successful insertion returns the URL through which the paste can be accessed, otherwise, it will return an error code.
+
+2. **getPaste**(api_dev_key, api_paste_key)
+   * Where “api_paste_key” is a string representing the Paste Key of the paste to be retrieved.
+   * This API will return the textual data of the paste.
+
+3. **deletePaste**(api_dev_key, api_paste_key)
+   * A successful deletion returns ‘true’, otherwise returns ‘false’.
+
 ## 6. Database Model
 
 ### Schema 
