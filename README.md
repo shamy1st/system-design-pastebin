@@ -10,7 +10,6 @@ Difficulty Level: Easy
 
 * Pastebin like services enable users to store plain text or images over the network (typically the Internet) and generate unique URLs to access the uploaded data.
 * Such services are also used to share data over the network quickly, as users would just need to pass the URL to let other users see it.
-* 
 
 ## 1. Requirements
 
