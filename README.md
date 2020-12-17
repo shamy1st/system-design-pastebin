@@ -42,7 +42,7 @@ Difficulty Level: Easy
 
 ## 3. Estimation
 
-* assume here that we get one million new pastes added to our system every day.
+* assume here that we get 1M new pastes added to our system every day.
 * assume we plan for 10 years.
 * assume a 5:1 ratio between read and write.
 
@@ -67,19 +67,26 @@ Difficulty Level: Easy
 
 ### Bandwidth Estimates
 
-
+* average paste contains 10KB
+* Incoming data: 12 * 10KB = 120 KB/sec
+* Outgoing data: 58 * 10KB =~ 0.6 MB/sec 
 
 ### Memory Estimates
 
-
+* We can cache some of the hot pastes that are frequently accessed.
+* Following the 80-20 rule, meaning 20% of hot pastes generate 80% of traffic, we would like to cache these 20% pastes
+* Since we have 5M read requests per day, to cache 20% of these requests, we would need: 0.2 * 5M * 10KB ~= 10 GB
 
 ### High-level Estimates
 
-Metric         | Estimate
----------------|---------
-New Pastes     | 12 pastes/sec
-Paste Reads    | 58 reads/sec
-Storage        | 53 TB/10 years
+Metric               | Estimate
+---------------------|---------
+New Pastes           | 12 pastes/sec
+Paste Reads          | 58 reads/sec
+Incoming data        | 120 KB/s
+Outgoing data        | 0.6 MB/sec
+Storage for 10 years | 53 TB
+Memory for cache     | 10 GB
 
 
 ## 4. High-level Design
