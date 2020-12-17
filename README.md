@@ -91,15 +91,26 @@ Memory for cache     | 10 GB
 
 ## 4. High-level Design
 
+* At a high level, we need an application layer that will serve all the read and write requests.
+* Application layer will talk to a storage layer to store and retrieve data.
+* We can segregate our storage layer with one database storing metadata related to each paste, users, etc., while the other storing the paste contents in some object storage (like Amazon S3).
+* This division of data will also allow us to scale them individually.
+
+![](https://github.com/shamy1st/system-design-pastebin/blob/main/hld.png)
+
 ## 5. System APIs
 
 ## 6. Database Model
 
 ### Schema 
 
+![](https://github.com/shamy1st/system-design-pastebin/blob/main/database-model.png)
+
 ### Which kind of database should we use?
 
 ## 7. Low-level Design
+
+![](https://github.com/shamy1st/system-design-pastebin/blob/main/lld.png)
 
 ### Solution 01
 
