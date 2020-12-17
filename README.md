@@ -88,25 +88,25 @@ Storage        | 53 TB/10 years
 
 ## 6. Database Model
 
-    ### Schema 
+### Schema 
 
-    ### Which kind of database should we use?
+### Which kind of database should we use?
 
 ## 7. Low-level Design
 
-    ### Solution 01
+### Solution 01
 
-    ### Solution 02
+### Solution 02
 
 ## 8. Bottlenecks
 
-    ### Data Partitioning and Replication
+### Data Partitioning and Replication
 
-    ### Cache
+### Cache
 
-    ### Load Balancer (LB)
+### Load Balancer (LB)
 
-    ### Purging or DB cleanup
+### Purging or DB cleanup
 
 ## 9. Security and Permissions
 
