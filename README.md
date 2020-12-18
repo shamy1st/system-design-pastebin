@@ -124,9 +124,19 @@ Memory for cache     | 10 GB
 
 ## 6. Database Model
 
+A few observations about the nature of the data we are storing:
+
+1. We need to store billions of records.
+2. Each metadata object we are storing would be small (less than 1KB).
+3. Each paste object we are storing can be of medium size (it can be a few MB).
+4. There are no relationships between records, except if we want to store which user created what Paste.
+5. Our service is read-heavy.
+
 ### Schema 
 
 ![](https://github.com/shamy1st/system-design-pastebin/blob/main/database-model.png)
+
+* Here, ‘URlHash’ is the URL equivalent of the TinyURL and ‘ContentKey’ is a reference to an external object storing the contents of the paste
 
 ### Which kind of database should we use?
 
