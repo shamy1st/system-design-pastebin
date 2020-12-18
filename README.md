@@ -93,8 +93,6 @@ Memory for cache     | 10 GB
 
 * At a high level, we need an application layer that will serve all the read and write requests.
 * Application layer will talk to a storage layer to store and retrieve data.
-* We can segregate our storage layer with one database storing metadata related to each paste, users, etc., while the other storing the paste contents in some object storage (like Amazon S3).
-* This division of data will also allow us to scale them individually.
 
 ![](https://github.com/shamy1st/system-design-pastebin/blob/main/hld.png)
 
@@ -139,6 +137,10 @@ A few observations about the nature of the data we are storing:
 * Here, ‘URlHash’ is the URL equivalent of the TinyURL and ‘ContentKey’ is a reference to an external object storing the contents of the paste
 
 ### Which kind of database should we use?
+
+* We can segregate our storage layer with one database storing metadata related to each paste, users, etc.
+* while the other storing the paste contents in some object storage (like Amazon S3).
+* This division of data will also allow us to scale them individually.
 
 ## 7. Low-level Design
 
