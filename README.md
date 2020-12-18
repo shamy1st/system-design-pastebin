@@ -195,11 +195,20 @@ look **database model** section
 
 ### Data Partitioning and Replication
 
+same as TinyURL
+
 ### Cache
+
+same as TinyURL
 
 ### Load Balancer (LB)
 
+same as TinyURL
+
 ### Purging or DB cleanup
+
+same as TinyURL
 
 ## 9. Security and Permissions
 
+same as TinyURL
