@@ -40,7 +40,34 @@ Difficulty Level: Easy
     * Since our service supports custom URLs, users can pick any URL that they like, but providing a custom URL is not mandatory.
     * However, it is reasonable (and often desirable) to impose a size limit on custom URLs, so that we have a consistent URL database.
 
-## 3. Estimation
+## 3. Database Model
+
+A few observations about the nature of the data we are storing:
+
+1. We need to store billions of records.
+2. Each metadata object we are storing would be small (less than 1KB).
+3. Each paste object we are storing can be of medium size (it can be a few MB).
+4. There are no relationships between records, except if we want to store which user created what Paste.
+5. Our service is read-heavy.
+
+### Schema 
+
+![](https://github.com/shamy1st/system-design-pastebin/blob/main/database-model.png)
+
+* Here, ‘URlHash’ is the URL equivalent of the TinyURL and ‘ContentKey’ is a reference to an external object storing the contents of the paste
+
+### Which kind of database should we use?
+
+* We can segregate our storage layer with one database storing metadata related to each paste, users, etc.
+* while the other storing the paste contents in some object storage (like Amazon S3).
+* This division of data will also allow us to scale them individually.
+
+We can divide our datastore layer into two:
+
+1. **Metadata database**: We can use a relational database like MySQL or a Distributed Key-Value store like Dynamo or Cassandra.
+2. **Object storage**: We can store our contents in an Object Storage like Amazon’s S3. Whenever we feel like hitting our full capacity on content storage, we can easily increase it by adding more servers.
+
+## 4. Estimation
 
 * assume here that we get 1M new pastes added to our system every day.
 * assume we plan for 10 years.
@@ -88,15 +115,14 @@ Outgoing data        | 0.6 MB/sec
 Storage for 10 years | 53 TB
 Memory for cache     | 10 GB
 
-
-## 4. High-level Design
+## 5. High-level Design
 
 * At a high level, we need an application layer that will serve all the read and write requests.
 * Application layer will talk to a storage layer to store and retrieve data.
 
 ![](https://github.com/shamy1st/system-design-pastebin/blob/main/hld.png)
 
-## 5. System APIs
+## 6. System APIs
 
 * We can have SOAP or REST APIs to expose the functionality of our service.
 
@@ -119,34 +145,6 @@ Memory for cache     | 10 GB
 
 3. **deletePaste**(api_dev_key, api_paste_key)
    * A successful deletion returns ‘true’, otherwise returns ‘false’.
-
-## 6. Database Model
-
-A few observations about the nature of the data we are storing:
-
-1. We need to store billions of records.
-2. Each metadata object we are storing would be small (less than 1KB).
-3. Each paste object we are storing can be of medium size (it can be a few MB).
-4. There are no relationships between records, except if we want to store which user created what Paste.
-5. Our service is read-heavy.
-
-### Schema 
-
-![](https://github.com/shamy1st/system-design-pastebin/blob/main/database-model.png)
-
-* Here, ‘URlHash’ is the URL equivalent of the TinyURL and ‘ContentKey’ is a reference to an external object storing the contents of the paste
-
-### Which kind of database should we use?
-
-* We can segregate our storage layer with one database storing metadata related to each paste, users, etc.
-* while the other storing the paste contents in some object storage (like Amazon S3).
-* This division of data will also allow us to scale them individually.
-
-We can divide our datastore layer into two:
-
-1. **Metadata database**: We can use a relational database like MySQL or a Distributed Key-Value store like Dynamo or Cassandra.
-2. **Object storage**: We can store our contents in an Object Storage like Amazon’s S3. Whenever we feel like hitting our full capacity on content storage, we can easily increase it by adding more servers.
-
 
 ## 7. Low-level Design
 
